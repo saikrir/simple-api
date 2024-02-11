@@ -1,0 +1,20 @@
+spring:
+  profiles:
+     active: dev
+  datasource:
+    driver-class-name: oracle.jdbc.OracleDriver
+    url: jdbc:oracle:thin:@skrao-db-server:1521:XE
+    username: ${DB_USER}
+    password: ${DB_PASS}
+
+tracing:
+  url: http://localhost:4318/v1/traces
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+      
+logging:
+  pattern:
+    level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"
